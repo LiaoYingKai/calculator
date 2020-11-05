@@ -3,6 +3,9 @@
     <CalculationBar :formula="['3000', '+', '1000']" :number="4000"/>
     <CalculationButton :value="1" @onClick="handleClickNumber"> 1 </CalculationButton>
     <CalculationButton value="/" @onClick="handleClickNumber" type="operator"> / </CalculationButton>
+    <FeatureButton> AC </FeatureButton>
+    <FeatureButton type="two"> = </FeatureButton>
+
   </div>
 </template>
 
@@ -10,12 +13,14 @@
 import { defineComponent  } from 'vue'
 import CalculationButton from '@/components/CalculationButton.vue' 
 import CalculationBar from '@/components/CalculationBar.vue' 
+import FeatureButton from '@/components/FeatureButton.vue' 
 
 export default defineComponent({
   name: 'App',
   components: {
     CalculationButton,
-    CalculationBar
+    CalculationBar,
+    FeatureButton
   },
   setup() {
     function handleClickNumber(number) {
