@@ -1,12 +1,20 @@
 <template>
   <div class="calculator">
     <CalculationBar :formula="['3000', '+', '1000']" :number="4000"/>
-    <CalculationButton :value="1" @onClick="handleClickNumber"> 1 </CalculationButton>
-    <CalculationButton value="/" @onClick="handleClickNumber" type="operator"> / </CalculationButton>
-    <FeatureButton> AC </FeatureButton>
-    <FeatureButton type="two"> = </FeatureButton>
-
-  </div>
+      <div class="flex container">
+        <div class="flex flex-wrap">
+          <CalculationButton v-for="(number, index) in numbers" :key="index" :value="number"> {{number}} </CalculationButton>
+        </div>
+        <div class="flex flex-column">
+          <CalculationButton v-for="(operator, index) in operators" :key="index" :value="operator" type="operator"> {{operator}} </CalculationButton>
+        </div>
+      </div>
+      <div class="flex">
+        <FeatureButton> AC </FeatureButton>
+        <FeatureButton> ⌫ </FeatureButton>
+        <FeatureButton type="two"> = </FeatureButton>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -23,11 +31,15 @@ export default defineComponent({
     FeatureButton
   },
   setup() {
+    const numbers = [7, 8, 9, 4,5,6,1,2,3,0,'00', '.'];
+    const operators = ['÷','x','+','-'];
     function handleClickNumber(number) {
       console.log(number)
     }
     return {
-      handleClickNumber
+      handleClickNumber,
+      numbers,
+      operators,
     }
   }
 })
@@ -57,5 +69,29 @@ html, body {
   background-color: #062145;
   box-shadow: 0px 20px 40px #00000066;
   border-radius: 20px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+}
+.container {
+  > div {
+    &:first-child {
+      flex: 3;
+    }
+    &:last-child {
+      flex: 1;
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
 }
 </style>
