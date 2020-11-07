@@ -45,7 +45,7 @@ button {
   background: transparent linear-gradient(90deg, #00C4FF 0%, #6C00FF 100%) 0% 0% no-repeat padding-box;
   color: #fff;
   text-align: right;
-  width: 144px;
+  width: 155px;
   font-size: 16px;
   padding: 18px 30px;
   box-sizing: border-box;

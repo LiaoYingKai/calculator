@@ -43,11 +43,13 @@ button {
   width: 72px;
   height: 64px;
   padding: 0;
+  margin-bottom: 16px;
 }
 .operator-button {
   background-color: #041936;
 }
 .default-button {
   background-color: transparent;
+  box-shadow: 0px 0px 0px;
 }
 </style>
