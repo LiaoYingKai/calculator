@@ -1,7 +1,7 @@
 <template>
   <div class="calculation-bar">
     <div class="calculation-bar__formula"> {{ formula.join(' ') }} </div>
-    <div class="calculation-bar__number"> {{formatNumber}} </div>
+    <div class="calculation-bar__number"> {{format(number) || 0}} </div>
   </div>
 </template>
 <script>
@@ -27,7 +27,8 @@ export default defineComponent({
     const formatNumber = format()
 
     return {
-      formatNumber
+      formatNumber,
+      format
     }
   }
 })
@@ -42,6 +43,7 @@ export default defineComponent({
   white-space:nowrap;
 
   &__formula {
+    height: 22px;
     widows: 100%;
     color: #00C4FF;
     overflow-x: scroll;
