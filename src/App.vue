@@ -1,6 +1,6 @@
 <template>
   <div class="calculator">
-    <CalculationBar :formula="['3000', '+', '1000']" :number="4000"/>
+    <CalculationBar :formula="formula" :number="displayNum"/>
       <div class="flex container">
         <div class="flex flex-wrap">
           <CalculationButton v-for="(number, index) in numbers" :key="index" :value="number"> {{number}} </CalculationButton>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { defineComponent  } from 'vue'
+import { defineComponent, ref } from 'vue'
 import CalculationButton from '@/components/CalculationButton.vue' 
 import CalculationBar from '@/components/CalculationBar.vue' 
 import FeatureButton from '@/components/FeatureButton.vue' 
@@ -33,11 +33,15 @@ export default defineComponent({
   setup() {
     const numbers = [7, 8, 9, 4,5,6,1,2,3,0,'00', '.'];
     const operators = ['÷','x','+','-'];
+    const displayNum = ref('');
+    const formula = ref([]);
     function handleClickNumber(number) {
       console.log(number)
     }
     return {
       handleClickNumber,
+      displayNum,
+      formula,
       numbers,
       operators,
     }
