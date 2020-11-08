@@ -25,8 +25,8 @@
         </div>
       </div>
       <div class="flex">
-        <FeatureButton> AC </FeatureButton>
-        <FeatureButton> ⌫ </FeatureButton>
+        <FeatureButton @onClick="handleClear"> AC </FeatureButton>
+        <FeatureButton @onClick="handleDeelteLastNumber"> ⌫ </FeatureButton>
         <FeatureButton type="two"> = </FeatureButton>
       </div>
     </div>
@@ -52,6 +52,9 @@ export default defineComponent({
     const formula = ref([]);
 
     function handleClickNumber(number) {
+      if (number === '.' && !displayNum.value) {
+        displayNum.value = displayNum.value + '0'
+      }
       if (displayNum.value.includes('.') & number === '.') return 
       displayNum.value = displayNum.value + number
     }
@@ -67,9 +70,19 @@ export default defineComponent({
       displayNum.value = ''
     }
 
+    function handleClear() {
+      displayNum.value = ''
+      formula.value = []
+    }
+    function handleDeelteLastNumber() {
+      displayNum.value = displayNum.value.slice(0, -1)
+    }
+
     return {
       handleClickNumber,
       handleClickOperator,
+      handleClear,
+      handleDeelteLastNumber,
       displayNum,
       formula,
       numbers,
