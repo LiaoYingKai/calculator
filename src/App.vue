@@ -3,10 +3,25 @@
     <CalculationBar :formula="formula" :number="displayNum"/>
       <div class="flex container">
         <div class="flex flex-wrap">
-          <CalculationButton v-for="(number, index) in numbers" :key="index" :value="number"> {{number}} </CalculationButton>
+          <CalculationButton
+            v-for="(number, index) in numbers"
+            :key="index"
+            :value="number"
+            @onClick="handleClickNumber"
+          >
+            {{number}}
+          </CalculationButton>
         </div>
         <div class="flex flex-column">
-          <CalculationButton v-for="(operator, index) in operators" :key="index" :value="operator" type="operator"> {{operator}} </CalculationButton>
+          <CalculationButton
+            v-for="(operator, index) in operators"
+            :key="index"
+            :value="operator"
+            type="operator"
+            @onClick="handleClickOperator"
+          >
+            {{operator}}
+          </CalculationButton>
         </div>
       </div>
       <div class="flex">
@@ -35,11 +50,26 @@ export default defineComponent({
     const operators = ['÷','x','+','-'];
     const displayNum = ref('');
     const formula = ref([]);
+
     function handleClickNumber(number) {
-      console.log(number)
+      if (displayNum.value.includes('.') & number === '.') return 
+      displayNum.value = displayNum.value + number
     }
+
+    function handleClickOperator(operator) {
+      const lastIndex = formula.value.length - 1
+      const lastOperator = formula.value[lastIndex]
+      if (operators.includes(lastOperator) && !displayNum.value) {
+        formula.value = formula.value.map((item, index) => index === lastIndex ? operator : item)
+        return
+      }
+      formula.value = [...formula.value, displayNum.value, operator]
+      displayNum.value = ''
+    }
+
     return {
       handleClickNumber,
+      handleClickOperator,
       displayNum,
       formula,
       numbers,
